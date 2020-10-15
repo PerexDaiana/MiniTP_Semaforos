@@ -16,7 +16,7 @@ struct semaforos {
 	sem_t sem_armarMedallon;
 	sem_t sem_cocinarMedallon;
 	sem_t sem_armarHamburguesa;
-	//poner demas semaforos aqui
+	
 };
 
 //creo los pasos con los ingredientes
@@ -83,7 +83,6 @@ void* imprimirAccion(void *data, char *accionIn) {
 		}
 	}
 }*/
-//funcion para tomar de ejemplo
 void* cortar(void *data) {
 	//creo el nombre de la accion de la funcion
 	char *accion = "cortar";
@@ -99,13 +98,11 @@ void* cortar(void *data) {
     pthread_exit(NULL);
 }
 void* mezclar(void *data) {
+	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
 	struct parametro *mydata = data;
 	sem_wait(&mydata->semaforos_param.sem_mezclar);
-
 	//creo el nombre de la accion de la funcion
 	char *accion = "mezclar";
-	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
-	//struct parametro *mydata = data;
 	//llamo a la funcion imprimir le paso el struct y la accion de la funcion
 	imprimirAccion(mydata,accion);
 	//uso sleep para simular que que pasa tiempo
@@ -117,14 +114,12 @@ void* mezclar(void *data) {
 }
 
 void* salar(void *data) {
+	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
 	struct parametro *mydata = data;
 	sem_wait(&mydata->semaforos_param.sem_salar);
 	pthread_mutex_lock(&salar);
-
 	//creo el nombre de la accion de la funcion
 	char *accion = "salar";
-	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
-	//struct parametro *mydata = data;
 	//llamo a la funcion imprimir le paso el struct y la accion de la funcion
 	imprimirAccion(mydata,accion);
 	//uso sleep para simular que que pasa tiempo
@@ -137,13 +132,11 @@ void* salar(void *data) {
 }
 
 void* armarMedallon(void *data) {
+	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
 	struct parametro *mydata = data;
 	sem_wait(&mydata->semaforos_param.sem_armarMedallon);
-
 	//creo el nombre de la accion de la funcion
 	char *accion = "armarMedallon";
-	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
-	//struct parametro *mydata = data;
 	//llamo a la funcion imprimir le paso el struct y la accion de la funcion
 	imprimirAccion(mydata,accion);
 	//uso sleep para simular que que pasa tiempo
@@ -155,14 +148,12 @@ void* armarMedallon(void *data) {
 }
 
 void* cocinarMedallon(void *data) {
+	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
 	struct parametro *mydata = data;
 	sem_wait(&mydata->semaforos_param.sem_cocinarMedallon);
 	pthread_mutex_lock(&cocinarMedallon);
-
 	//creo el nombre de la accion de la funcion
 	char *accion = "cocinarMedallon";
-	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
-	//struct parametro *mydata = data;
 	//llamo a la funcion imprimir le paso el struct y la accion de la funcion
 	imprimirAccion(mydata,accion);
 	//uso sleep para simular que que pasa tiempo
@@ -175,7 +166,6 @@ void* cocinarMedallon(void *data) {
 }
 
 void* cortarExtras(void *data) {
-
 	//creo el nombre de la accion de la funcion
 	char *accion = "cortarExtras";
 	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
@@ -192,7 +182,6 @@ void* cortarExtras(void *data) {
 
 void* hornear(void *data) {
 	pthread_mutex_lock(&hornear);
-
 	//creo el nombre de la accion de la funcion
 	char *accion = "hornear";
 	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
@@ -208,16 +197,14 @@ void* hornear(void *data) {
     pthread_exit(NULL);
 }
 
-void* armarHamburguesa(void *data) {
+void* armarHamburguesa(void *data) {	
+	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
 	struct parametro *mydata = data;
 	sem_wait(&mydata->semaforos_param.sem_armarHamburguesa);
 	sem_wait(&mydata->semaforos_param.sem_armarHamburguesa);
 	sem_wait(&mydata->semaforos_param.sem_armarHamburguesa);
-
 	//creo el nombre de la accion de la funcion
 	char *accion = "armarHamburguesa";
-	//creo el puntero para pasarle la referencia de memoria (data) del struct pasado por parametro (la cual es un puntero). 
-	//struct parametro *mydata = data;
 	//llamo a la funcion imprimir le paso el struct y la accion de la funcion
 	imprimirAccion(mydata,accion);
 	//uso sleep para simular que que pasa tiempo
@@ -238,7 +225,6 @@ void* ejecutarReceta(void *i) {
 	sem_t sem_armarHamburguesa;
 
 
-	//crear variables semaforos aqui
 
 	//variables hilos
 	pthread_t p1;	//cortar
@@ -250,7 +236,6 @@ void* ejecutarReceta(void *i) {
 	pthread_t p7;	//cortarExtras
 	pthread_t p8;	//armarHamburguesa
 
-	//crear variables hilos aqui
 
 	//numero del equipo (casteo el puntero a un int)
 	int p = *((int *) i);
@@ -272,8 +257,6 @@ void* ejecutarReceta(void *i) {
 	pthread_data->semaforos_param.sem_mezclar = sem_cocinarMedallon;
 	pthread_data->semaforos_param.sem_mezclar = sem_armarHamburguesa;
 
-
-	//setear demas semaforos al struct aqui
 
 
 	//seteo las acciones y los ingredientes (Faltan acciones e ingredientes) ¿Se ve hardcodeado no? ¿Les parece bien?
@@ -301,7 +284,7 @@ void* ejecutarReceta(void *i) {
 		else{
 			palabra=strtok(oracion, separador);
 			while(palabra != NULL){
-				if(indPalab == 0){
+				if(indPalab == 0){	//pregunto si es la primer palabra
 					strcpy(pthread_data->pasos_param[acciones].accion, palabra);
 					indPalab++;
 				}
@@ -328,7 +311,6 @@ void* ejecutarReceta(void *i) {
 	sem_init(&(pthread_data->semaforos_param.sem_cocinarMedallon),0,0);
 	sem_init(&(pthread_data->semaforos_param.sem_armarHamburguesa),0,0);
 
-	//inicializar demas semaforos aqui
 
 
 	//creo los hilos a todos les paso el struct creado (el mismo a todos los hilos) ya que todos comparten los semaforos 
@@ -394,7 +376,6 @@ void* ejecutarReceta(void *i) {
 	pthread_join (p8,NULL);
 
 
-	//crear join de demas hilos
 
 
 	//valido que el hilo se alla creado bien
@@ -411,7 +392,6 @@ void* ejecutarReceta(void *i) {
 	sem_destroy(&sem_cocinarMedallon);
 	sem_destroy(&sem_armarHamburguesa);
 
-	//destruir demas semaforos
 
 	//salida del hilo
 	 pthread_exit(NULL);
@@ -470,7 +450,4 @@ int main ()
     pthread_exit(NULL);
 }
 
-
-//Para compilar:   gcc HellsBurgers.c -o ejecutable -lpthread
-//Para ejecutar:   ./ejecutable
 
