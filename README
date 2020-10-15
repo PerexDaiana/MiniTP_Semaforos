@@ -59,5 +59,6 @@ p(armarHamburguesa)     //espera tres señales para ejecutarse ya que necesita q
   abrí el archivo desde el programa y comenzé a recorrerlo, tomo de a una oracion y con el strtok separo las palabras. Luego pregunto si es la primera, de ser así la guardo en accion y el resto de la palabras que componen la oración las guardo como ingredientes. realizo lo mismo con todas las oraciones consecuentes.
   En este paso, nuevamente tuve algunos errores tanto de sintaxis como de código ya que no inicializaba correctamente las variables en las ciclos.
  
- Por último, cuando el código funcionaba correctamente, en la funcion imprimirAccion, para cada printf creéun nuevo fprintf para direccionar todo lo que aparece por consola a un archivo txt llamado tareasRealizadas en el cual muestra que equipo ejecutaba cada funcion y quien termina primero de armar la hamburguesa.
-  
+ Cuando el código funcionaba correctamente, en la funcion imprimirAccion, para cada printf creéun nuevo fprintf para direccionar todo lo que aparece por consola a un archivo txt llamado tareasRealizadas en el cual muestra que equipo ejecutaba cada funcion y quien termina primero de armar la hamburguesa.
+ Y cree la función ganador para que esta indique quien es el ganador, es decir qué hilo llegó primero y le adicioné el exit(-1) para que este tomara solo el primer equipo y al igual que la función imprimirAcciones, los prints los redireccioné al archivo tareasRealizadas. A esta funcion la llamé en armarHamburguesa y le pasé mydata.
+ Y con esto finalicé mi trabajo de HellsBurguers.
