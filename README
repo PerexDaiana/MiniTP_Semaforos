@@ -1,3 +1,63 @@
 # Sistemas Operativos y Redes
 
 ## Trabajo Práctico de hilos y semáforos
+
+En el precente informe, paso a detallar los pasos y problemas que desarrollé a lo largo de la realización del trabajo práctico de hilos y semáforos.
+Primeramente, leí las consignas y fuí obteniendo los datos que me daban. Con estos, creé un pseudocódigo con las funciones que necesitaría para así poder organizarme y ver como estas deberían desarrollarse para la coorecta funcionalidad.
+
+cortar()                //se puede realizar en cualquier momento
+  cortar
+ V(s_mezclar)           //me habilita mezclar   		          
+
+p(s_mezclar)            //espera una señal para ejecutarse
+  mezclar 
+V(s_salar)              //me habilita salar
+
+p(s_salar)              //espera una señal para ejecutarse
+  mutex()               //bloquea la funcion cuando un equipo la está utilizando
+    salar 
+  mutex()               //desbloquea la función para que otro equipo pueda utilizarla
+V(s_armarMedallones)    //me habilita armar los medallones
+
+p(s_armarMedallones)
+  armarMedallones
+V(s_cocinarMedallon)    //me habilita cocinar el medallon
+
+
+p(s_cocinarMedallon)
+  mutex()               //bloquea la funcion cuando un equipo la está utilizando
+    cocinarMedallon
+  mutex()               //desbloquea la función para que otro equipo pueda utilizarla
+V(s_armarHamburguesa)   //me habilita armar la hamburguesa
+
+cortarExtras()          //se puede realizar en cualquier momento
+  cortarExtras
+V(s_armarHamburguesa)   //me habilita armar la hamburguesa
+
+hornear()               //se puede realizar en cualquier momento
+  mutex()               //bloquea la funcion cuando un equipo la está utilizando
+    hornear
+  mutex()               //desbloquea la función para que otro equipo pueda utilizarla
+V(s_armarHamburguesa)   //me habilita armar la hamburguesa
+
+p(armarHamburguesa)     //espera tres señales para ejecutarse ya que necesita que el medallon esté listo, los panes horneados y la lechuga y el tomate cortados
+  armarHamburguesa
+  La hamburguesa está armada
+  
+  
+  Luego de tener el pseudocódigo hecho, creé:
+  -los hilos con las acciones: cortar, mezclar, salar, armarMedallon, cocinar, hornear, cortarExtras y crearHamburguesa
+  -les paso los structs a los hilos
+  -los semáforos que necesitaría como lo son mezclar, salar, armarMedallon, cocinarMedallon y armar hamburguesa
+  -los mutex: salar, plancha, hornear
+  -las funciones que declaré en el pseudocódigo: la funcion cortar que inicializa la funcion mezclar, la cual estaba esperando esta señal para comenzar a ejecutarse, tal cual lo realicé en el pseudicódigo. Esto mismo realicé con las otras,y a salar, cocinar y hornear les agregué el wait para que se ejecuten de a un hilo a la vez, es decir, que solo la puedan utilizar un hilo a la vez.
+  -destruyo todos los semáforos
+  
+  Para comprobar que todo funcionara correctamente, seteo las acciones y los ingredientes
+  Cuando compilé el programa me salieron varios errores faciles de reparar, por ejemplo, en las funciones que utilicé los wait, tuve que cambiar de lugar las estructuras y ponerlas al principio, y otros errores de sitaxis
+  Luego de verificar que el código funcionaba correctamente, cree el archivo del cual los equipos hilos leerían la receta y la ejecutarían, poniendo como primer palabra, la accion a ejecutar y seguido de esta, los ingredientes que necesita cada una
+  abrí el archivo desde el programa y comenzé a recorrerlo, tomo de a una oracion y con el strtok separo las palabras. Luego pregunto si es la primera, de ser así la guardo en accion y el resto de la palabras que componen la oración las guardo como ingredientes. realizo lo mismo con todas las oraciones consecuentes.
+  En este paso, nuevamente tuve algunos errores tanto de sintaxis como de código ya que no inicializaba correctamente las variables en las ciclos.
+ 
+ Por último, cuando el código funcionaba correctamente, en la funcion imprimirAccion, para cada printf creéun nuevo fprintf para direccionar todo lo que aparece por consola a un archivo txt llamado tareasRealizadas en el cual muestra que equipo ejecutaba cada funcion y quien termina primero de armar la hamburguesa.
+  
